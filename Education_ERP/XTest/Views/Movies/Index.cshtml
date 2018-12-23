@@ -1,0 +1,73 @@
+﻿@model XTest.Models.Dtos.MovieListDto
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Список фильмов</h2>
+
+<p>
+    @Html.ActionLink("Добавить", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Items[0].Title)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Items[0].Description)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Items[0].ReleaseDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Items[0].Director)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Items[0].UserName)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model.Items) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Title)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Description)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ReleaseDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Director)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.UserName)
+        </td>
+        <td>
+            @Html.ActionLink("Изменить", "Edit", new { id=item.ID }) |
+            @Html.ActionLink("Детали", "Details", new { id=item.ID }) |
+            @Html.ActionLink("Удалить", "Delete", new { id=item.ID })
+        </td>
+    </tr>
+}
+
+</table>
+
+<nav aria-label="Page navigation example">
+    <ul class="pagination">
+        @for(var p = 1; p <= Model.PagesCount; p++)
+        {
+            if(p == Model.CurrentPage)
+            {
+                <li class="page-item active"><a class="page-link" href="?page=@p">@p</a></li>
+            }
+            else
+            {
+                <li class="page-item"><a class="page-link" href="?page=@p">@p</a></li>
+            }
+        }
+    </ul>
+</nav>
